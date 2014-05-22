@@ -2,19 +2,11 @@ package com.example.beacontour;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
-
-
 import java.util.Random;
 
+import com.estimote.sdk.Beacon;
+import com.example.source.beacon.*;
 
-
-
-
-
-
-import source.beacon.ListBeaconsActivity;
 import source.classes.Place;
 import source.classes.User;
 import source.classes.PlacesDataSource;
@@ -51,6 +43,7 @@ ActionBar.TabListener {
 	private ActionBar actionBar;
 	// Tab titles
 	private String[] tabs = { "Map", "Beacons", "Details" };
+	private List<Beacon> beacons;
 
 
 
@@ -67,7 +60,7 @@ ActionBar.TabListener {
 		user.LoadPlacesFromDatabase(datasource.getAllPlaces());
 		Intent intent = new Intent(MainActivity.this,ListBeaconsActivity.class);
 		//startActivityForResult(intent,1);
-		
+		this.beacons = this.createBeacons(5);
 
 		// use the SimpleCursorAdapter to show the
 		// elements in a ListView
@@ -120,11 +113,13 @@ ActionBar.TabListener {
 		// TODO Auto-generated method stub
 		if (requestCode==1){
 			if(resultCode==RESULT_OK){
-				//ArrayList<String> list= data.getStringArrayListExtra("beacons");
-				
+				ArrayList<String> list= data.getStringArrayListExtra("beacons");
+			}else if(resultCode == RESULT_CANCELED) {
+				String message = data.getStringExtra("problem");
+				Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 			}
-		
 		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 
@@ -220,5 +215,13 @@ ActionBar.TabListener {
 		}
 		adapter.notifyDataSetChanged();
 	}
+	  private List<Beacon> createBeacons(int beaconCount){
+		  List<Beacon> beaconList = new ArrayList<Beacon>();
+		  for(int i = 0; i < beaconCount;i++){
+			  beaconList.add(new Beacon(Integer.toString(i),"beacon"+i,"12121212",i,i,10*i,i*2));
+		  }
+		  return beaconList;
+	  }
+
 
 }

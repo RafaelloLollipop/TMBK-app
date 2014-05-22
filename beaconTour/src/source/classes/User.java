@@ -3,10 +3,10 @@ package source.classes;
 import java.util.ArrayList;
 import java.util.List;
 
-import source.beacon.ListBeaconsActivity;
 import android.content.Intent;
 
 import com.estimote.sdk.Beacon;
+import com.example.source.beacon.ListBeaconsActivity;
 
 public class User {
 
