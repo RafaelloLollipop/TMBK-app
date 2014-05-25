@@ -1,4 +1,4 @@
-package source.beacon;
+package com.example.beacontour;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,9 +8,8 @@ import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 import com.estimote.sdk.utils.L;
-import com.example.beacontour.R;
+import com.example.source.beacon.LeDeviceListAdapter;
 
-import source.beacon.LeDeviceListAdapter;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
@@ -25,7 +24,7 @@ import android.widget.Toast;
 
 public class ListBeaconsActivity extends Activity {
 
-	private static final String TAG = ListBeaconsActivity.class.getSimpleName();
+	private static final String TAG = ListBeaconsActivity2.class.getSimpleName();
 
 	public static final String EXTRAS_TARGET_ACTIVITY = "extrasTargetActivity";
 	public static final String EXTRAS_BEACON = "extrasBeacon";
@@ -84,7 +83,7 @@ public class ListBeaconsActivity extends Activity {
 		}
 		if (!beaconManager.isBluetoothEnabled()) {
 			Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-			startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+			//startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 		} else {
 			connectToService();
 		}

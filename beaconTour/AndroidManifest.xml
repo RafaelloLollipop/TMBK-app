@@ -22,15 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity  
-            android:name="com.example.beacontour.SecondActivity"
+        <activity
+            android:name="source.beacon.ListBeaconsActivity"
             android:label="@string/title_activity_second" >
-        </activity>
-        <activity
-            android:name="source.beacon.ListBeaconsActivity">
-        </activity>
-        <activity
-            android:name="source.beacon.LeDeviceListAdapter">
         </activity>
     </application>
 

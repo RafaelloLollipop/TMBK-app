@@ -2,11 +2,21 @@ package com.example.beacontour;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
+
+
 import java.util.Random;
 
-import com.estimote.sdk.Beacon;
-import com.example.source.beacon.*;
 
+
+
+
+
+
+
+
+import source.beacon.ListBeaconsActivity;
 import source.classes.Place;
 import source.classes.User;
 import source.classes.PlacesDataSource;
@@ -17,6 +27,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -28,6 +39,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,7 +55,6 @@ ActionBar.TabListener {
 	private ActionBar actionBar;
 	// Tab titles
 	private String[] tabs = { "Map", "Beacons", "Details" };
-	private List<Beacon> beacons;
 
 
 
@@ -59,9 +70,9 @@ ActionBar.TabListener {
 		datasource.open();
 		user.LoadPlacesFromDatabase(datasource.getAllPlaces());
 		Intent intent = new Intent(MainActivity.this,ListBeaconsActivity.class);
-		//startActivityForResult(intent,1);
-		this.beacons = this.createBeacons(5);
-
+		startActivityForResult(intent,1);
+		
+		
 		// use the SimpleCursorAdapter to show the
 		// elements in a ListView
 
@@ -103,36 +114,37 @@ ActionBar.TabListener {
 		});
 
 	}
-
-
-
-	
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		if (requestCode==1){
 			if(resultCode==RESULT_OK){
-				ArrayList<String> list= data.getStringArrayListExtra("beacons");
-			}else if(resultCode == RESULT_CANCELED) {
-				String message = data.getStringExtra("problem");
-				Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+				this.user.setBeaconsString(data.getStringArrayListExtra("beacons"));
 			}
+		
 		}
-		super.onActivityResult(requestCode, resultCode, data);
 	}
-
-
-
-
 
 	public void ChangeCurrentPlace(int positionClicked)
 	{
-		
-		  TextView t = (TextView)findViewById(R.id.details_textView);			 
-		    t.setText("Step One: blast egg");
-
-		
+		    Place currentPlace= user.getPlaces().get(positionClicked);
+		    TextView t = (TextView)findViewById(R.id.details_textView);
+			t.setText(currentPlace.getText());	
+			
+			t = (TextView)findViewById(R.id.details_nameView);
+			t.setText(currentPlace.getName());	
+			
+			t = (TextView)findViewById(R.id.details_distanceView);
+			t.setText("Odleglość: "+Integer.toString(currentPlace.getDistance())+" m");	
+			
+			
+			Resources res = getResources();
+			int id = res.getIdentifier("rect_"+currentPlace.getPhoto(), "drawable", getBaseContext().getPackageName());
+			ImageView imageView = (ImageView) findViewById(R.id.details_image);
+			imageView.setImageResource(id);
+			imageView = (ImageView) findViewById(R.id.details_image);
+			
 	}
 	
 	public void populateListView(){
@@ -145,15 +157,9 @@ ActionBar.TabListener {
 			   public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
 				   TextView v=(TextView) view.findViewById(R.id.beaconList);
 				   ChangeCurrentPlace(position);
-				   viewPager.setCurrentItem(2);
-				 
-				 				    
-					//makeText.setText(currentPlace.getName());
-				   
+				   viewPager.setCurrentItem(2);				 				    
 			   } 
 			});
-		
-		
 		
 		list.setAdapter(adapter);
 	}
@@ -169,11 +175,16 @@ ActionBar.TabListener {
 			{	
 				itemView = getLayoutInflater().inflate(R.layout.place_view, parent,false);
 			}
-
 			Place currentPlace= user.getPlaces().get(position);
-
-			TextView makeText = (TextView) itemView.findViewById(R.id.item_txtMake);
+			TextView makeText = (TextView) itemView.findViewById(R.id.item_txtName);
 			makeText.setText(currentPlace.getName());
+			
+			Resources res = getResources();
+			int id = res.getIdentifier("sq_"+currentPlace.getPhoto(), "drawable", getBaseContext().getPackageName());
+			ImageView imageView = (ImageView) itemView.findViewById(R.id.item_image);
+			imageView.setImageResource(id);
+			
+			
 			return itemView;
 		}
 
@@ -208,20 +219,12 @@ ActionBar.TabListener {
 			String[] places = new String[] { "Cool", "Very nice", "Hate it" };
 			int nextInt = new Random().nextInt(3);
 			// save the new comment to the database
-			place = datasource.createPlace(places[nextInt],"content");
+			place = datasource.createPlace(places[nextInt],"content",10,"beacontour");
 			adapter.add(place);
 			break;
 
 		}
 		adapter.notifyDataSetChanged();
 	}
-	  private List<Beacon> createBeacons(int beaconCount){
-		  List<Beacon> beaconList = new ArrayList<Beacon>();
-		  for(int i = 0; i < beaconCount;i++){
-			  beaconList.add(new Beacon(Integer.toString(i),"beacon"+i,"12121212",i,i,10*i,i*2));
-		  }
-		  return beaconList;
-	  }
-
 
 }

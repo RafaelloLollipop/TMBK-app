@@ -2,36 +2,62 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="#5ed0bd"
     android:orientation="vertical"
-    android:background="#17df0d">
+    android:overScrollMode="ifContentScrolls" >
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/details_nameView"
+        android:layout_marginBottom="60dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/details_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/sq_adas" />
+
+            <TextView
+                android:id="@+id/details_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="0.30"
+                android:scrollbars="vertical"
+                android:text="Człowiek pojawił się na terenie dzisiejszego Krakowa już w okresie prehistorii. Jak wskazują badania archeologiczne, miało to miejsce przed ok. 200 tys. lat. Ludzie znaleźli tu dobre warunki do osiedlenia się dzięki dobremu dostępowi do pożywienia (bliskość rzeki, wiele lasów), dużej liczbie jaskiń, które były schronieniem dla naszych przodków oraz dzięki surowcom naturalnym i bliskości dużych szlaków komunikacyjnych. To wszystko spowodowało osiedlanie się coraz większej liczby ludzi i utworzenie prazalążka dzisiejszego miasta."
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/details_nameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="114dp"
-        android:text="TextView" />
-
-    <ImageView
-        android:id="@+id/details_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/sq_adas" />
+        android:text="Kraków"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/details_textView"
+        android:id="@+id/details_distanceView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/details_image"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="50dp"
-        android:text="Bardzo dlugi tekst, ze ohohohho D tyle wiadomosci tyle mozliwoBardzo dlugi tekst, ze ohohohho D tyle wiadomosci tyle mozliwosci tylewiedzy!Bardzo dlugi tekst, ze ohohohho D tyle wiadomosci tyle mozliwosci tylewiedzy!Bardzo dlugi tekst, ze ohohohho D tyle wiadomosci tyle mozliwosci tylewiedzy!Bardzo dlugi tekst, ze ohohohho D tyle wiadomosci tyle mozliwosci tylewiedzy!Bardzo dlugi tekst, ze ohohohho D tyle wiadomosci tyle mozliwosci tylewiedzy!Bardzo dlugi tekst, ze ohohohho D tyle wiadomosci tyle mozliwosci tylewiedzy!Bardzo dlugi tekst, ze ohohohho D tyle wiadomosci tyle mozliwosci tylewiedzy!sci tylewiedzy!"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
- 
+        android:layout_alignLeft="@+id/details_nameView"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
 </RelativeLayout>

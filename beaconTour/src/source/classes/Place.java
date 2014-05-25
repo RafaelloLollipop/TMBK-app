@@ -4,19 +4,42 @@ package source.classes;
 public class Place {
 	private long id;
 	private String name;
+
 	private int x,y,z;
-	float distance;
-	int photo;
+	int distance;
+	String photo;
 	private String text;
 	Boolean photoWorth;
 	int beaconID;
 
-	public Place(String name,String text)
+	public Place(String name,String text,int distance,String photo)
 	{
 		this.name=name;
 		this.text=text;
+		this.distance=distance;
+		this.photo=photo;
 	}
 
+
+	public String getPhoto() {
+		return photo;
+	}
+
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+
+	public int getDistance() {
+		return distance;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+	
+	
 	public long getId() {
 		return id;
 	}

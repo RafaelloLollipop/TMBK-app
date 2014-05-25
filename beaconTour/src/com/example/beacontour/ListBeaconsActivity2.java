@@ -1,16 +1,5 @@
-package source.beacon;
+package com.example.beacontour;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import com.estimote.sdk.Beacon;
-import com.estimote.sdk.BeaconManager;
-import com.estimote.sdk.Region;
-import com.estimote.sdk.utils.L;
-import com.example.beacontour.R;
-
-import source.beacon.LeDeviceListAdapter;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
@@ -21,9 +10,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
-public class ListBeaconsActivity extends Activity {
+import com.estimote.sdk.Beacon;
+import com.estimote.sdk.BeaconManager;
+import com.estimote.sdk.Region;
+import com.estimote.sdk.utils.L;
+import com.example.beacontour.R;
+import com.example.source.beacon.LeDeviceListAdapter;
+
+import java.util.*;
+
+/**
+ * Displays list of found beacons sorted by RSSI.
+ * Starts new activity with selected beacon if activity was provided.
+ *
+ *
+ */
+public class ListBeaconsActivity2 extends Activity {
 
 	private static final String TAG = ListBeaconsActivity.class.getSimpleName();
 
@@ -84,7 +89,7 @@ public class ListBeaconsActivity extends Activity {
 		}
 		if (!beaconManager.isBluetoothEnabled()) {
 			Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-			startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+			//startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 		} else {
 			connectToService();
 		}
@@ -138,9 +143,9 @@ public class ListBeaconsActivity extends Activity {
 				if (getIntent().getStringExtra(EXTRAS_TARGET_ACTIVITY) != null) {
 					try {
 						Class<?> clazz = Class.forName(getIntent().getStringExtra(EXTRAS_TARGET_ACTIVITY));
-						Intent intent = new Intent(ListBeaconsActivity.this, clazz);
-						intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
-						startActivity(intent);
+						//Intent intent = new Intent(ListBeaconsActivity.this, clazz);
+						//intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
+						//startActivity(intent);
 					} catch (ClassNotFoundException e) {
 						Log.e(TAG, "Finding class by name failed", e);
 					}
@@ -156,12 +161,11 @@ public class ListBeaconsActivity extends Activity {
 		  finish();
 	  }
 	
-	  private ArrayList<Beacon> createSimulatedBeacons(int beaconCount){
-		  ArrayList<Beacon> beaconList = new ArrayList<Beacon>();
-		 for(int i = 0; i < beaconCount;i++){
-
-		  beaconList.add(new Beacon("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA","beacon"+Integer.toString(i),"12121212",i,i,10*i,i*2));
-		  }
+	  private List<Beacon> createSimulatedBeacons(int beaconCount){
+		  List<Beacon> beaconList = new ArrayList<Beacon>();
+		// for(int i = 0; i < beaconCount;i++){
+		 // beaconList.add(new Beacon(Integer.toString(i),"beacon"+i,"12121212",i,i,10*i,i*2));
+		 // }
 		  return beaconList;
 	  }
 	  
@@ -169,11 +173,11 @@ public class ListBeaconsActivity extends Activity {
 		  Intent intent = new Intent();
 		  ArrayList<String> beaconStringList = new ArrayList<String>();
 		  List<Beacon> simulatedBeacons = createSimulatedBeacons(5);
-		  
+		  /*
 		  for(Beacon beacon : simulatedBeacons){ 
 			  beaconStringList.add(beacon.toString());
 		  }
-		  
+		  */
 		  intent.putStringArrayListExtra("beacons", beaconStringList);
 		  
 		  setResult(RESULT_OK, intent);

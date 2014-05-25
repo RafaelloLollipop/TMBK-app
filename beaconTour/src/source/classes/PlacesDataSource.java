@@ -18,7 +18,7 @@ public class PlacesDataSource {
   private SQLiteDatabase database;
   private MySQLiteHelper dbHelper;
   private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
-      MySQLiteHelper.COLUMN_PLACE};//MySQLiteHelper.COLUMN_TEXT };
+      MySQLiteHelper.COLUMN_PLACE,MySQLiteHelper.COLUMN_IMAGENAME,MySQLiteHelper.COLUMN_DISTANCE,MySQLiteHelper.COLUMN_TEXT};
 
   public PlacesDataSource(Context context) {
     dbHelper = new MySQLiteHelper(context);
@@ -32,10 +32,14 @@ public class PlacesDataSource {
     dbHelper.close();
   }
 
-  public Place createPlace(String place,String text) {
+  public Place createPlace(String place,String text, int distance, String imagename) {
     ContentValues values = new ContentValues();
     values.put(MySQLiteHelper.COLUMN_PLACE, place);
-    //values.put(MySQLiteHelper.COLUMN_TEXT, text);
+    values.put(MySQLiteHelper.COLUMN_IMAGENAME, imagename);
+    values.put(MySQLiteHelper.COLUMN_DISTANCE, distance);
+    values.put(MySQLiteHelper.COLUMN_TEXT, text);
+
+
     long insertId = database.insert(MySQLiteHelper.TABLE_PLACES, null,
         values);
     Cursor cursor = database.query(MySQLiteHelper.TABLE_PLACES,
@@ -72,7 +76,7 @@ public class PlacesDataSource {
   }
 
   private Place cursorToPlace(Cursor cursor) {
-	  Place place = new Place("RAF","wixa");
+	  Place place = new Place("RAF","wixSSSa",10,"beacontour");
 	  place.setId(cursor.getLong(0));
 	  place.setName(cursor.getString(1));
     return place;

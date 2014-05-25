@@ -3,26 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/item_txtMake"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="22dp"
-        android:layout_toRightOf="@+id/details_image"
-        android:text="TextView" />
-
     <ImageView
-        android:id="@+id/details_image"
+        android:id="@+id/item_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/item_txtMake"
-        android:layout_marginLeft="27dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="22dp"
         android:adjustViewBounds="true"
         android:maxHeight="80dp"
         android:maxWidth="80dp"
-        android:src="@drawable/rect_adas" />
+        android:src="@drawable/sq_kosciol" />
+
+    <TextView
+        android:id="@+id/item_txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/item_image"
+        android:layout_toRightOf="@+id/item_image"
+        android:paddingLeft="10dp"
+        android:text="TextView"
+        android:textSize="20sp" />
 
 </RelativeLayout>
