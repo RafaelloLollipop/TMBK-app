@@ -54,11 +54,11 @@ public class ListBeaconsActivity extends Activity {
 					@Override
 					public void run() {
 						Intent intent = new Intent();
-						ArrayList<String> beaconStringList = new ArrayList<String>();
-						for(Beacon beacon : beacons){ 
-							beaconStringList.add(beacon.toString());
-						}
-						intent.putStringArrayListExtra("beacons", beaconStringList);
+						int i = 0 ;
+						ArrayList<Beacon> beaconArr = new ArrayList<Beacon>(beacons);
+						
+						intent.putParcelableArrayListExtra("beacons", beaconArr);
+						
 						setResult(RESULT_OK, intent);
 						finish();
 					}

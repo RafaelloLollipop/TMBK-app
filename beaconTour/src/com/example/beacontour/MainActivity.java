@@ -16,6 +16,10 @@ import java.util.Random;
 
 
 
+
+
+import com.estimote.sdk.Beacon;
+
 import source.beacon.ListBeaconsActivity;
 import source.classes.Place;
 import source.classes.User;
@@ -29,6 +33,8 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -120,7 +126,7 @@ ActionBar.TabListener {
 		// TODO Auto-generated method stub
 		if (requestCode==1){
 			if(resultCode==RESULT_OK){
-				this.user.setBeaconsString(data.getStringArrayListExtra("beacons"));
+				this.user.setBeacons(data.<Beacon>getParcelableArrayListExtra("beacons"));
 			}
 		
 		}
