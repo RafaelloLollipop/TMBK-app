@@ -76,7 +76,7 @@ public class PlacesDataSource {
   }
 
   private Place cursorToPlace(Cursor cursor) {
-	  Place place = new Place("RAF","wixSSSa",10,"beacontour");
+	  Place place = new Place("RAF","wixSSSa",10,"beacontour","1");
 	  place.setId(cursor.getLong(0));
 	  place.setName(cursor.getString(1));
     return place;

@@ -18,8 +18,11 @@ import java.util.Random;
 
 
 
+
+
 import com.estimote.sdk.Beacon;
 
+import source.beacon.BeaconThread;
 import source.beacon.ListBeaconsActivity;
 import source.classes.Place;
 import source.classes.User;
@@ -37,6 +40,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -67,18 +71,15 @@ ActionBar.TabListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
+		
+		setContentView(R.layout.activity_main);	
 		// Initilization
 		//new
 		user = new User();
 		datasource = new PlacesDataSource(this);
 		datasource.open();
 		user.LoadPlacesFromDatabase(datasource.getAllPlaces());
-		Intent intent = new Intent(MainActivity.this,ListBeaconsActivity.class);
-		startActivityForResult(intent,1);
-		
-		
+		Log.e("TAG", "RAFAL");
 		// use the SimpleCursorAdapter to show the
 		// elements in a ListView
 
@@ -118,18 +119,20 @@ ActionBar.TabListener {
 			public void onPageScrollStateChanged(int arg0) {
 			}
 		});
-
 	}
+	
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
+		
 		if (requestCode==1){
 			if(resultCode==RESULT_OK){
 				this.user.setBeacons(data.<Beacon>getParcelableArrayListExtra("beacons"));
+				this.user.updateAvailablePlaces();
+			}
 			}
 		
-		}
 	}
 
 	public void ChangeCurrentPlace(int positionClicked)
@@ -150,7 +153,6 @@ ActionBar.TabListener {
 			ImageView imageView = (ImageView) findViewById(R.id.details_image);
 			imageView.setImageResource(id);
 			imageView = (ImageView) findViewById(R.id.details_image);
-			
 	}
 	
 	public void populateListView(){
@@ -195,7 +197,9 @@ ActionBar.TabListener {
 		}
 
 		public MyListAdapter(){
-			super(MainActivity.this,R.layout.place_view, user.getPlaces());
+			super(MainActivity.this,R.layout.place_view, user.getAvaiblePlaces());
+			   		 				    
+
 		}
 	}
 
@@ -208,8 +212,12 @@ ActionBar.TabListener {
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		// on tab selected
 		// show respected fragment view
+		
 		viewPager.setCurrentItem(tab.getPosition());
-
+		if(tab.getPosition()==1) {
+			
+			
+		}
 	}
 
 	@Override
@@ -217,20 +225,11 @@ ActionBar.TabListener {
 	}
 
 	public void onClick(View view) {
-		@SuppressWarnings("unchecked")
-		ArrayAdapter<Place> adapter = new MyListAdapter();
-		Place place = null;
-		switch (view.getId()) {
-		case R.id.add:
-			String[] places = new String[] { "Cool", "Very nice", "Hate it" };
-			int nextInt = new Random().nextInt(3);
-			// save the new comment to the database
-			place = datasource.createPlace(places[nextInt],"content",10,"beacontour");
-			adapter.add(place);
-			break;
 
-		}
-		adapter.notifyDataSetChanged();
+		Intent intent = new Intent(this,ListBeaconsActivity.class);
+		startActivityForResult(intent,1);
+		populateListView();		    
+	
 	}
 
 }

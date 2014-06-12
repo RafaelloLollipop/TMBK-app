@@ -3,6 +3,7 @@ package source.classes;
 
 public class Place {
 	private long id;
+	private String mac;
 	private String name;
 
 	private int x,y,z;
@@ -12,12 +13,23 @@ public class Place {
 	Boolean photoWorth;
 	int beaconID;
 
-	public Place(String name,String text,int distance,String photo)
+	public Place(String name,String text,int distance,String photo,String mac)
 	{
+		this.mac=mac;
 		this.name=name;
 		this.text=text;
 		this.distance=distance;
 		this.photo=photo;
+	}
+
+
+	public String getMac() {
+		return mac;
+	}
+
+
+	public void setMac(String mac) {
+		this.mac = mac;
 	}
 
 

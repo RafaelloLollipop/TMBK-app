@@ -38,34 +38,36 @@ public class ListBeaconsActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_second);
-		simulateBeacons();
-
+		//super.onCreate(savedInstanceState);
+		//setContentView(R.layout.fragment_map);
 		adapter = new LeDeviceListAdapter(this);
-
+		
+		
 		L.enableDebugLogging(true);
-
 		beaconManager = new BeaconManager(this);
+		Log.e("TAG","callBack");
+		Log.e("TAG",beaconManager.getClass().toString());
+		
 		beaconManager.setRangingListener(new BeaconManager.RangingListener() {
+			
 			@Override
 			public void onBeaconsDiscovered(Region region, final List<Beacon> beacons) {
+				Log.e("TAG","onDicover");
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
 						Intent intent = new Intent();
 						int i = 0 ;
 						ArrayList<Beacon> beaconArr = new ArrayList<Beacon>(beacons);
-						
-						intent.putParcelableArrayListExtra("beacons", beaconArr);
-						
+						intent.putParcelableArrayListExtra("beacons", beaconArr);		
 						setResult(RESULT_OK, intent);
 						finish();
 					}
 				});
+				
 			}
 		});
-
+		onStart();
 	}
 
 	@Override
@@ -75,20 +77,23 @@ public class ListBeaconsActivity extends Activity {
 		super.onDestroy();
 	}
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		if (!beaconManager.hasBluetooth()) {
-			Toast.makeText(this, "Device does not have Bluetooth Low Energy", Toast.LENGTH_LONG).show();
-			return;
-		}
-		if (!beaconManager.isBluetoothEnabled()) {
-			Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-			startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-		} else {
-			connectToService();
-		}
-	}
+	 protected void onStart() {
+		    super.onStart();
+
+		    // Check if device supports Bluetooth Low Energy.
+		    if (!beaconManager.hasBluetooth()) {
+		      Toast.makeText(this, "Device does not have Bluetooth Low Energy", Toast.LENGTH_LONG).show();
+		      return;
+		    }
+
+		    // If Bluetooth is not enabled, let user enable it.
+		    if (!beaconManager.isBluetoothEnabled()) {
+		      Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+		      startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+		    } else {
+		      connectToService();
+		    }
+		  }
 
 	@Override
 	protected void onStop() {
@@ -107,7 +112,6 @@ public class ListBeaconsActivity extends Activity {
 			if (resultCode == Activity.RESULT_OK) {
 				connectToService();
 			} else {
-				sendIntentWithMessage("Bluetooth not enabled");
 				getActionBar().setSubtitle("Bluetooth not enabled");
 			}
 		}
@@ -116,7 +120,7 @@ public class ListBeaconsActivity extends Activity {
 
 
 	private void connectToService() {
-		getActionBar().setSubtitle("Scanning...");
+		//getActionBar().setSubtitle("Scanning...");
 		adapter.replaceWith(Collections.<Beacon>emptyList());
 		beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
 			@Override
@@ -124,13 +128,12 @@ public class ListBeaconsActivity extends Activity {
 				try {
 					beaconManager.startRanging(ALL_ESTIMOTE_BEACONS_REGION);
 				} catch (RemoteException e) {
-					sendIntentWithMessage("Cannot start ranging, something terrible happened");
 					Log.e(TAG, "Cannot start ranging", e);
 				}
 			}
 		});
 	}
-
+/*
 	private AdapterView.OnItemClickListener createOnItemClickListener() {
 		return new AdapterView.OnItemClickListener() {
 			@Override
@@ -148,37 +151,7 @@ public class ListBeaconsActivity extends Activity {
 			}
 		};
 	}
-
-	  private void sendIntentWithMessage(String message){
-		  Intent intent = new Intent();
-		  intent.putExtra("problem", message);
-		  setResult(RESULT_CANCELED, intent);
-		  finish();
-	  }
+*/
 	
-	  private ArrayList<Beacon> createSimulatedBeacons(int beaconCount){
-		  ArrayList<Beacon> beaconList = new ArrayList<Beacon>();
-		 for(int i = 0; i < beaconCount;i++){
-
-		  beaconList.add(new Beacon("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA","beacon"+Integer.toString(i),"12121212",i,i,10*i,i*2));
-		  }
-		  return beaconList;
-	  }
-	  
-	  private void simulateBeacons(){
-		  Intent intent = new Intent();
-		  ArrayList<String> beaconStringList = new ArrayList<String>();
-		  List<Beacon> simulatedBeacons = createSimulatedBeacons(5);
-		  
-		  for(Beacon beacon : simulatedBeacons){ 
-			  beaconStringList.add(beacon.toString());
-		  }
-		  
-		  intent.putStringArrayListExtra("beacons", beaconStringList);
-		  
-		  setResult(RESULT_OK, intent);
-		  finish();
-		  
-	  }
 
 }
