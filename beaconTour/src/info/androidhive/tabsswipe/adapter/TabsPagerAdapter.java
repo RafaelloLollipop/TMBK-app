@@ -6,7 +6,11 @@ import com.example.beacontour.MapFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
- 
+/**
+ * Adapter class form fragment manager 
+ * @author Adam, Ante, rafal
+ *
+ */
 public class TabsPagerAdapter extends FragmentPagerAdapter {
  
     public TabsPagerAdapter(FragmentManager fm) {

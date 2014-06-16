@@ -19,19 +19,34 @@ public class PlacesDataSource {
   private MySQLiteHelper dbHelper;
   private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
       MySQLiteHelper.COLUMN_PLACE,MySQLiteHelper.COLUMN_IMAGENAME,MySQLiteHelper.COLUMN_DISTANCE,MySQLiteHelper.COLUMN_TEXT};
-
+  /**
+   * sets Data source
+   * @param context <Context>
+   */
   public PlacesDataSource(Context context) {
     dbHelper = new MySQLiteHelper(context);
   }
-
+  /**
+   * opens new database
+   * @throws SQLException
+   */
   public void open() throws SQLException {
     database = dbHelper.getWritableDatabase();
   }
-
+  /**
+   * closes database
+   */
   public void close() {
     dbHelper.close();
   }
-
+	/**
+	 * creates new place based on params 
+	 * @param place <String>
+	 * @param text <String>
+	 * @param distance <Int>
+	 * @param imagename <String>
+	 * @return
+	 */
   public Place createPlace(String place,String text, int distance, String imagename) {
     ContentValues values = new ContentValues();
     values.put(MySQLiteHelper.COLUMN_PLACE, place);
@@ -50,14 +65,20 @@ public class PlacesDataSource {
     cursor.close();
     return newPlace;
   }
-
+  /**
+   * Deletes comment
+   * @param place <Place>
+   */
   public void deleteComment(Place place) {
     long id = place.getId();
     System.out.println("Comment deleted with id: " + id);
     database.delete(MySQLiteHelper.TABLE_PLACES, MySQLiteHelper.COLUMN_ID
         + " = " + id, null);
   }
-
+  /**
+   * returns list (List<Place>) of all places in database
+   * @return
+   */
   public List<Place> getAllPlaces() {
     List<Place> places = new ArrayList<Place>();
 
@@ -74,7 +95,11 @@ public class PlacesDataSource {
     cursor.close();
     return places;
   }
-
+  /**
+   * 
+   * @param cursor <Cursor>
+   * @return
+   */
   private Place cursorToPlace(Cursor cursor) {
 	  Place place = new Place("RAF","wixSSSa",10,"beacontour","1");
 	  place.setId(cursor.getLong(0));

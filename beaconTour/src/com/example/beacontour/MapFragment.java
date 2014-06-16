@@ -8,6 +8,11 @@ import android.view.View;
 import android.view.ViewGroup; 
 import android.app.Activity;
 import android.os.Bundle;
+/**
+ * Display map with location of beacons
+ * @author Adam, Antek, Rafal
+ *
+ */
 public class MapFragment extends Fragment {
  
     @Override

@@ -6,7 +6,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
- 
+/**
+ * Fragment which displays location detais 
+ * @author Adam, Antek, Rafal
+ *
+ */
 public class DetailsFragment extends Fragment {
  
     @Override

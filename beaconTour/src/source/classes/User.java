@@ -20,23 +20,35 @@ public class User {
 	ArrayList<Beacon> Beacons = new ArrayList<Beacon>();
 	List<Place> availablePlaces;
 	private Context context;
-
+	/**
+	 * class constructor
+	 */
 	public User() {
 		super();
 		Places = new ArrayList<Place>();
 	}
 	
-	
+	/**
+	 * Beacon getter (ArrayList<Beacon>)
+	 * @return
+	 */
 	public ArrayList<Beacon> getBeacons() {
 		return Beacons;
 	}
 
-
+	/**
+	 * Beacon setter (ArrayList<Beacon>)
+	 * @param beacons <ArraList<Beacon>>
+	 */
 	public void setBeacons(ArrayList<Beacon> beacons) {
 		Beacons = beacons; 
 	}
 
-
+	/**
+	 * return lista of nearby places  
+	 * List<Place>
+	 * @return
+	 */
 	public List<Place> getAvailablePlaces() {
 		return availablePlaces;
 	}
@@ -46,6 +58,10 @@ public class User {
 	{
 	
 	}
+	/**
+	 * Loads places from database
+	 * @param list <List<Place>>
+	 */
 	public void LoadPlacesFromDatabase(List<Place> list)
 	{	
 		// not sure if it works
@@ -57,12 +73,18 @@ public class User {
 		this.Places.add(new Place(context.getString(R.string.glowa_name),context.getString(R.string.glowa_opis),1,"glowa","DONT HAVE XD"));
 
 	}
-	
+	/**
+	 * Places getter
+	 * @return
+	 */
 	public List<Place> getPlaces() {
 		return Places;
 	}
 	
-	
+	/**
+	 * Mac getter
+	 * @return
+	 */
 	public List<String> GetMacList()
 	{
 		List<String> list = new ArrayList<String>();
@@ -72,7 +94,10 @@ public class User {
 		}
 		return list;
 	}
-	
+	/**
+	 * Returns list of available places
+	 * @return
+	 */
 	public List<Place> getAvaiblePlaces() {
 		List<Place> list = new ArrayList<Place>();
 		List<String> macList = GetMacList();
@@ -82,10 +107,16 @@ public class User {
 		}
 		return list;
 	}
+	/**
+	 * Updates current available places
+	 */
 	public void updateAvailablePlaces(){
 		this.availablePlaces = this.getAvaiblePlaces();
 	}
-
+	/**
+	 * Place setter
+	 * @param places <List<Place>>
+	 */
 	public void setPlaces(List<Place> places) {
 		Places = places;
 	}

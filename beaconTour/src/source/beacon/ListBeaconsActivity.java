@@ -22,7 +22,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
-
+/**
+ * Activity which lists nearby Beacons
+ * 
+ * @author Adam, Antek, Rafał
+ *
+ */
 public class ListBeaconsActivity extends Activity {
 
 	private static final String TAG = ListBeaconsActivity.class.getSimpleName();
@@ -35,7 +40,10 @@ public class ListBeaconsActivity extends Activity {
 
 	private BeaconManager beaconManager;
 	private LeDeviceListAdapter adapter;
-
+	/**
+	 * onCreate called when activity is created
+	 * @param savedInstanceState <Bundle>
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		//super.onCreate(savedInstanceState);
@@ -76,7 +84,10 @@ public class ListBeaconsActivity extends Activity {
 
 		super.onDestroy();
 	}
-
+	/**
+	 * onStart
+	 * called when activity starts
+	 */
 	 protected void onStart() {
 		    super.onStart();
 
@@ -118,7 +129,9 @@ public class ListBeaconsActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-
+	/**
+	 * connects to service
+	 */
 	private void connectToService() {
 		//getActionBar().setSubtitle("Scanning...");
 		adapter.replaceWith(Collections.<Beacon>emptyList());

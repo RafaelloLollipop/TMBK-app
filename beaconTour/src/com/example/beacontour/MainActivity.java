@@ -38,7 +38,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Build;
-
+/**
+ * Main acitivity, manages all of the tabs
+ * @author Adam, Antek , Rafał
+ *
+ */
 public class MainActivity extends FragmentActivity implements
 ActionBar.TabListener {
 	private User user;
@@ -118,7 +122,10 @@ ActionBar.TabListener {
 			}
 		
 	}
-
+	/**
+	 * Changes current place
+	 * @param positionClicked <Int>
+	 */
 	public void ChangeCurrentPlace(int positionClicked)
 	{
 		    Place currentPlace= user.getPlaces().get(positionClicked);
@@ -129,7 +136,7 @@ ActionBar.TabListener {
 			t.setText(currentPlace.getName());	
 			
 			t = (TextView)findViewById(R.id.details_distanceView);
-			t.setText("Odleglość: "+Integer.toString(currentPlace.getDistance())+" m");	
+			t.setText("OdlegloÅ›Ä‡: "+Integer.toString(currentPlace.getDistance())+" m");	
 			
 			
 			Resources res = getResources();
@@ -138,7 +145,9 @@ ActionBar.TabListener {
 			imageView.setImageResource(id);
 			imageView = (ImageView) findViewById(R.id.details_image);
 	}
-	
+	/**
+	 * Populates list with places
+	 */
 	public void populateListView(){
 		ArrayAdapter<Place> adapter = new MyListAdapter();
 		ListView list = (ListView) findViewById(R.id.beaconList);
@@ -156,7 +165,11 @@ ActionBar.TabListener {
 		list.setAdapter(adapter);
 	}
 
-
+	/**
+	 * List Adapter
+	 * @author Adam, Antek, Rafał
+	 *
+	 */
 	private class MyListAdapter extends ArrayAdapter<Place> {
 
 		@Override
@@ -179,11 +192,12 @@ ActionBar.TabListener {
 			
 			return itemView;
 		}
-
+		/**
+		 * MyListAdapter constructor
+		 */
 		public MyListAdapter(){
 			super(MainActivity.this,R.layout.place_view, user.getAvaiblePlaces());
-			   		 				    
-
+			   		 				   
 		}
 	}
 
@@ -207,7 +221,10 @@ ActionBar.TabListener {
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 	}
-
+	/**
+	 * When clicked, sends Intent for list of beacons
+	 * @param view <View>
+	 */
 	public void onClick(View view) {
 
 		Intent intent = new Intent(this,ListBeaconsActivity.class);

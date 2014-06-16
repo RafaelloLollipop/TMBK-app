@@ -6,7 +6,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
- 
+/**
+ * Displays list of Beacons 
+ * @author Adam
+ *
+ */
 public class BeaconsFragment extends Fragment {
  
     @Override
