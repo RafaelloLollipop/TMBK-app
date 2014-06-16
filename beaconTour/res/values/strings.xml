@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <string name="app_name">beaconTour</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_second">MainActivity</string>
-
+    <string name="kosciol_name">Kościół Mariacki w Krakowie</string>
+    <string name="adas_name">Pomnik Adama Mickiewicza</string>
+    <string name="glowa_name">Pomnik głowy</string>
+    <string name="suk_name">Sukiennice</string>
+    <string name="kosciol_opis">
+        Kościół archiprezbiterialny pw. Wniebowzięcia Najświętszej Marii Panny, zwany także kościołem Mariackim – jeden z największych i najważniejszych, po Katedrze Wawelskiej, kościołów Krakowa, od 1962 posiadający tytuł bazyliki mniejszej. Należy do najbardziej znanych zabytków Krakowa i Polski. Jest kościołem gotyckim, budowanym w XIV i XV wieku. Położony jest przy północno-wschodnim narożniku Rynku Głównego, na Placu Mariackim 5. Kościół znajduje się na trasie Małopolskiej Drogi św. Jakuba z Sandomierza do Tyńca.
+    </string>
+	<string name="glowa_opis">
+	    Rzeźba ta przedstawia spętaną twarz młodzieńca o pustych oczodołach i nosi nazwę "Eros bendato", co po polsku oznacza "Eros spętany". Powstała ona w 1999 roku przez znanego polskiego rzeźbiarza Igora Mitoraja, którego rzeźby można oglądać między innymi  w takich miastach jak Paryż, Rzym, Mediolan, Lozanna. Ta warta około pół miliona euro rzeźba z brązu została podarowana miastu Kraków za darmo. W 2005 roku została ustawiona pod Wieżą Ratuszową i w tym miejscu stoi do dziś.
+	</string>
+	<string name="suk_opis">
+	    Sukiennice podlegały przez wieki wielu przemianom i ich obecny kształt w niczym nie przypomina dawnych sukiennic. Już w roku 1257 książę Bolesław Wstydliwy przy lokacji Krakowa zobowiązał się postawić kramy sukienne. Stanowiły one podwójny rząd kramów kamiennych, tworzących jakby uliczkę pośrodku Rynku. Sukiennice w tej postaci przetrwały do połowy XIV stulecia.
+	</string>
+	<string name="adas_opis">
+	    Pomnik powstał według projektu Teodora Rygiera, uroczyste odsłonięcie nastąpiło 16 czerwca 1898 r, czyli w setnym roku urodzin Adama Mickiewicza. Projekt pomnika został przedstawiony przez Rygiera podczas konkursu na monument Wieszcza, zorganizowanego w Krakowie w latach 1880-1890. Swoje wizje pomnika zaprezentowali wówczas m.in. następujący artyści: Tomasz Dykas, Walery Gadomski, Antoni Kurzawa, Jan Matejko i Pius Weloński. Wybór do realizacji projektu Rygiera spotkał się z krytyką, czego wyrazem były liczne polemiki prasowe oraz osobne publikacje poświęcone temu zagadnieniu. Surowemu osądowi poddawano zwłaszcza wartość artystyczną dzieła.
+	</string>
 </resources>

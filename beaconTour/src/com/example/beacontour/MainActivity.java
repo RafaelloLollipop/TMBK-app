@@ -3,26 +3,10 @@ package com.example.beacontour;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
 import java.util.Random;
-
-
-
-
-
-
-
-
-
-
-
-
-
 import com.estimote.sdk.Beacon;
 
-import source.beacon.BeaconThread;
+
 import source.beacon.ListBeaconsActivity;
 import source.classes.Place;
 import source.classes.User;
